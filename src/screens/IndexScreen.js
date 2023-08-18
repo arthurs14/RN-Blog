@@ -1,10 +1,17 @@
 import { useContext } from "react";
-import { View, Text, StyleSheet, FlatList, Button } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Context } from "../context/BlogContext";
 import BlogPostListItem from "../components/BlogPostListItem";
 
-const IndexScreen = () => {
+const IndexScreen = ({ navigation }) => {
   const { state, addBlogPost, deleteBlogPost } = useContext(Context);
 
   return (
@@ -16,11 +23,17 @@ const IndexScreen = () => {
         data={state}
         keyExtractor={(blog) => blog.id}
         renderItem={({ item }) => (
-          <BlogPostListItem
-            title={item.title}
-            id={item.id}
-            deleteBlog={deleteBlogPost}
-          />
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("Show", { id: item.id, title: item.title })
+            }
+          >
+            <BlogPostListItem
+              title={item.title}
+              id={item.id}
+              deleteBlog={deleteBlogPost}
+            />
+          </TouchableOpacity>
         )}
       />
     </View>
