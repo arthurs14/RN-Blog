@@ -1,17 +1,18 @@
 import { useContext } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, FlatList, Button } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import BlogContext from "../context/BlogContext";
+import { Context } from "../context/BlogContext";
 
 const IndexScreen = () => {
-  const blogPosts = useContext(BlogContext);
+  const { state, addBlogPost } = useContext(Context);
 
   return (
     <View>
       <StatusBar style="auto" />
       <Text>Index Screen</Text>
+      <Button title="Add Post" onPress={addBlogPost} />
       <FlatList
-        data={blogPosts}
+        data={state}
         keyExtractor={(blog) => blog.title}
         renderItem={({ item }) => <Text>{item.title}</Text>}
       />
