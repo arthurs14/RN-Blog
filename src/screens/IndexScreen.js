@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { View, Text, StyleSheet, FlatList, Button } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { Context } from "../context/BlogContext";
+import BlogPostListItem from "../components/BlogPostListItem";
 
 const IndexScreen = () => {
   const { state, addBlogPost } = useContext(Context);
@@ -14,7 +15,7 @@ const IndexScreen = () => {
       <FlatList
         data={state}
         keyExtractor={(blog) => blog.title}
-        renderItem={({ item }) => <Text>{item.title}</Text>}
+        renderItem={({ item }) => <BlogPostListItem title={item.title} />}
       />
     </View>
   );
