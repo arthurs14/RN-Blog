@@ -5,7 +5,7 @@ import { Context } from "../context/BlogContext";
 import BlogPostListItem from "../components/BlogPostListItem";
 
 const IndexScreen = () => {
-  const { state, addBlogPost } = useContext(Context);
+  const { state, addBlogPost, deleteBlogPost } = useContext(Context);
 
   return (
     <View>
@@ -14,8 +14,14 @@ const IndexScreen = () => {
       <Button title="Add Post" onPress={addBlogPost} />
       <FlatList
         data={state}
-        keyExtractor={(blog) => blog.title}
-        renderItem={({ item }) => <BlogPostListItem title={item.title} />}
+        keyExtractor={(blog) => blog.id}
+        renderItem={({ item }) => (
+          <BlogPostListItem
+            title={item.title}
+            id={item.id}
+            deleteBlog={deleteBlogPost}
+          />
+        )}
       />
     </View>
   );

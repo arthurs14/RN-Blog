@@ -1,11 +1,15 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Feather } from "@expo/vector-icons";
 
-const BlogPostListItem = ({ title }) => {
+const BlogPostListItem = ({ title, id, deleteBlog }) => {
   return (
     <View style={styles.row}>
-      <Text style={styles.title}>{title}</Text>
-      <Feather style={styles.icon} name="trash" />
+      <Text style={styles.title}>
+        {title} - {id}
+      </Text>
+      <TouchableOpacity onPress={() => deleteBlog(id)}>
+        <Feather style={styles.icon} name="trash" />
+      </TouchableOpacity>
     </View>
   );
 };
